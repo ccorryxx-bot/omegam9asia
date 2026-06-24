@@ -1,4 +1,4 @@
-const CACHE_NAME = 'M9-cache-v202406241930';
+const CACHE_NAME = 'M9-cache-v202606111742';
 const STATIC_ASSETS = [
   '/',
   '/index.html',
@@ -8,7 +8,6 @@ const STATIC_ASSETS = [
   '/css/lib-common.css',
   '/css/lib-bonus.css',
   '/css/M9-RWD-R.css',
-  '/css/mobile-fix.css',
   '/js/jquery-3.7.1.min.js',
   '/js/bootstrap.bundle-5.3.7.min.js',
   '/js/swiper-bundle.min.js',
