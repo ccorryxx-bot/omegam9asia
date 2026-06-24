@@ -1,16 +1,14 @@
-/* M9 Asia — Mobile Fix v5 (minimal, surgical)
-   Root cause: site detects phone as device-PC
-   PC CSS: tabs flex-centered, min-width:100px each
-   Result: 8×120px = 960px on 392px = overflow + Home off-screen left
-   Fix: only 5 targeted rules, no structural changes
+/* M9 Asia Mobile Fix v6
+   Proven safe: html/body overflow-x:hidden (worked in v3)
+   Removed: page-wrapper overflow rule (caused blank page)
+   Fix: tab justify-content:flex-start + scroll + compact size
 */
 
-/* Global scroll lock */
 html, body { overflow-x: hidden !important; }
 
 @media screen and (max-width: 768px) {
 
-  /* ① Tab container: flip justify to start + make scrollable */
+  /* Fix 1: Tab row — start from left, enable horizontal scroll */
   .page-web.device-PC .page-wrapper .page-content .main-vert-tab .tab-nav-group .tab-navs {
     justify-content: flex-start !important;
     overflow-x: auto !important;
@@ -18,34 +16,33 @@ html, body { overflow-x: hidden !important; }
     scrollbar-width: none;
     -ms-overflow-style: none;
   }
-  .page-web.device-PC .page-wrapper .page-content .main-vert-tab .tab-nav-group .tab-navs::-webkit-scrollbar { display: none; }
+  .page-web.device-PC .page-wrapper .page-content .main-vert-tab .tab-nav-group .tab-navs::-webkit-scrollbar {
+    display: none;
+  }
 
-  /* ② Tabs: compact width, no excess margin */
+  /* Fix 2: Each tab — compact, no excess margin */
   .page-web.device-PC .page-wrapper .page-content .main-vert-tab .tab-nav-group .tab-navs .tab {
     min-width: 60px !important;
     width: 65px !important;
     margin: 0 2px !important;
+    flex-shrink: 0 !important;
   }
 
-  /* ③ Sub-tab row (Dice/Crash/Mine): same treatment */
+  /* Fix 3: Sub-tab row (Dice/Crash/Mine) — same */
   .page-web.device-PC .page-wrapper .page-content .main-vert-tab .tab-nav-group.tab-nav-group-s .tab-navs {
     justify-content: flex-start !important;
     overflow-x: auto !important;
     scrollbar-width: none;
     -ms-overflow-style: none;
   }
-  .page-web.device-PC .page-wrapper .page-content .main-vert-tab .tab-nav-group.tab-nav-group-s .tab-navs::-webkit-scrollbar { display: none; }
-
-  /* ④ Swiper banner: clip within viewport */
-  .swiper-banner, #swiperBanner, .swiper.swiper-banner {
-    max-width: 100vw !important;
-    overflow: hidden !important;
+  .page-web.device-PC .page-wrapper .page-content .main-vert-tab .tab-nav-group.tab-nav-group-s .tab-navs::-webkit-scrollbar {
+    display: none;
   }
 
-  /* ⑤ Prevent page wrapper from exceeding viewport */
-  .page-web.device-PC .page-wrapper {
+  /* Fix 4: Swiper banner — no wider than viewport */
+  .swiper-banner, #swiperBanner {
     max-width: 100vw !important;
-    overflow-x: hidden !important;
+    overflow: hidden !important;
   }
 
 }
