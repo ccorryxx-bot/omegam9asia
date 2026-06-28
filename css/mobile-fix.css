@@ -1,14 +1,76 @@
-/* M9 Asia Mobile Fix v6
-   Proven safe: html/body overflow-x:hidden (worked in v3)
-   Removed: page-wrapper overflow rule (caused blank page)
-   Fix: tab justify-content:flex-start + scroll + compact size
+/* M9 Asia Mobile Fix v7
+   v6: tab nav scroll + compact size
+   v7 NEW: Game menu icon size cap, bottom nav fix, login modal fix
+   Safe rules: NO overflow on page-wrapper (caused blank page in v1/v2)
 */
 
 html, body { overflow-x: hidden !important; }
 
 @media screen and (max-width: 768px) {
 
-  /* Fix 1: Tab row — start from left, enable horizontal scroll */
+  /* =====================================================
+     FIX 1: Game menu tab ICON images — cap to mobile size
+     These were showing at full natural size (~150-200px)
+     causing the nav to eat up the whole screen.
+     Target: #gameMenuTabWrapper > a > img
+  ====================================================== */
+  #gameMenuTabWrapper a img,
+  #gameMenuTabWrapper a > img,
+  .tab-navs > a img,
+  [id$="GameMenuTab"] img {
+    max-height: 52px !important;
+    max-width: 52px !important;
+    width: 52px !important;
+    height: 52px !important;
+    object-fit: contain !important;
+    display: block !important;
+    margin: 0 auto 2px auto !important;
+  }
+
+  /* FIX 1b: Game menu tab link — column layout, compact */
+  #gameMenuTabWrapper > a,
+  .tab-navs > a[id$="GameMenuTab"] {
+    display: inline-flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+    padding: 4px 4px 2px !important;
+    min-width: 64px !important;
+    max-width: 76px !important;
+    flex-shrink: 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  /* FIX 1c: Tab text label */
+  #gameMenuTabWrapper > a span,
+  #gameMenuTabWrapper > a p,
+  #gameMenuTabWrapper > a em,
+  .tab-navs > a[id$="GameMenuTab"] span {
+    font-size: 11px !important;
+    line-height: 1.2 !important;
+    text-align: center !important;
+    white-space: nowrap !important;
+    margin-top: 2px !important;
+    display: block !important;
+  }
+
+  /* FIX 1d: Wrapper — wrap into 2 rows max, center, scrollable */
+  #gameMenuTabWrapper,
+  .tab-navs[id="gameMenuTabWrapper"] {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    align-items: center !important;
+    overflow-x: hidden !important;
+    overflow-y: visible !important;
+    max-height: 160px !important;
+    padding: 2px 4px !important;
+    gap: 2px !important;
+  }
+
+  /* =====================================================
+     FIX 2 (v6 preserved): Sub-tab scroll (Home/Slots sub-tabs)
+  ====================================================== */
   .page-web.device-PC .page-wrapper .page-content .main-vert-tab .tab-nav-group .tab-navs {
     justify-content: flex-start !important;
     overflow-x: auto !important;
@@ -20,7 +82,7 @@ html, body { overflow-x: hidden !important; }
     display: none;
   }
 
-  /* Fix 2: Each tab — compact, no excess margin */
+  /* FIX 2b: Sub-tab items */
   .page-web.device-PC .page-wrapper .page-content .main-vert-tab .tab-nav-group .tab-navs .tab {
     min-width: 60px !important;
     width: 65px !important;
@@ -28,7 +90,7 @@ html, body { overflow-x: hidden !important; }
     flex-shrink: 0 !important;
   }
 
-  /* Fix 3: Sub-tab row (Dice/Crash/Mine) — same */
+  /* FIX 2c: Sub-sub-tab (Dice/Crash/Mine) */
   .page-web.device-PC .page-wrapper .page-content .main-vert-tab .tab-nav-group.tab-nav-group-s .tab-navs {
     justify-content: flex-start !important;
     overflow-x: auto !important;
@@ -39,10 +101,51 @@ html, body { overflow-x: hidden !important; }
     display: none;
   }
 
-  /* Fix 4: Swiper banner — no wider than viewport */
+  /* =====================================================
+     FIX 3: Swiper banner — no wider than viewport
+  ====================================================== */
   .swiper-banner, #swiperBanner {
     max-width: 100vw !important;
     overflow: hidden !important;
+  }
+
+  /* =====================================================
+     FIX 4: Login / Signup modal — ensure accessible
+     Modal could be covered by z-index or display:none
+  ====================================================== */
+  #modal-loginNew,
+  #modal-login,
+  #loginModal,
+  .modal-login {
+    z-index: 9999 !important;
+  }
+
+  /* Login / Register trigger buttons — always visible */
+  .btn-login, .btn-register,
+  [onclick*="openLoginPopup"],
+  [data-action="login"],
+  #loginBtn, #registerBtn {
+    display: inline-flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+
+  /* =====================================================
+     FIX 5: Page footer / bottom nav bar — keep visible
+     JS removes #pageFooter if no li items, so we can't
+     force display if it was removed. But if it exists,
+     keep it visible and sticky.
+  ====================================================== */
+  #pageFooter,
+  .page-footer,
+  #bottomNav,
+  .bottom-menu-bar,
+  .footer-menu-wrapper {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    position: relative !important;
+    z-index: 100 !important;
   }
 
 }
