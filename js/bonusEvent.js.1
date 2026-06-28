@@ -60,7 +60,7 @@ if (typeof (BonusEventHandler) == 'undefined') {
 			success : function(response) {
 				if (response.error ) {
 					alert(response.error);
-					location.reload();
+					// location.reload() removed;
 					return;
 				}
 
@@ -264,7 +264,7 @@ if (typeof (BonusEventHandler) == 'undefined') {
 					}else{
 						alert("Error occurred, please refresh and try again later !");
 					}
-					location.reload();
+					// location.reload() removed;
 					return;
 				}
 
@@ -320,7 +320,7 @@ if (typeof (BonusEventHandler) == 'undefined') {
 					} else {
 						alert("Error occurred, please refresh and try again later !");
 					}
-					location.reload();
+					// location.reload() removed;
 					return;
 				}
 
@@ -637,7 +637,7 @@ if (typeof (BonusEventHandler) == 'undefined') {
 					}else{
 						alert("Error occurred, please refresh and try again later !");
 					}
-					location.reload();
+					// location.reload() removed;
 					return;
 				}
 				page.attr('ticketCount',response.ticketCount);
@@ -2075,7 +2075,7 @@ if (typeof (BonusEventHandler) == 'undefined') {
 				if (response.error) {
 					BonusEventHandler.closeFancyAlert();
 					AlertHandler.showErrorAlert(response.error, function(){
-						window.location.reload();
+						window.// location.reload() removed;
 					});
 					return;
 				}
@@ -3254,7 +3254,7 @@ if (typeof (BonusEventHandler) == 'undefined') {
 			success : function(response) {
 				if (response.error ) {
 					alert(response.error);
-					location.reload();
+					// location.reload() removed;
 					return;
 				}
 				let eventPage = $j(`#PageDiv${bonusId}`);
