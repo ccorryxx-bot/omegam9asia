@@ -1,11 +1,11 @@
-name = "omegam9-ui-assets"
+name = "omegam9asia"
 main = "src/index.js"
 compatibility_date = "2026-09-08"
 
 [assets]
 directory = "./"
 binding = "ASSETS"
-run_worker_first = ["/img/thumb/*"]
+run_worker_first = true
 
 [[r2_buckets]]
 binding = "GAME_ASSETS"
